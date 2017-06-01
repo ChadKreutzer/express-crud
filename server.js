@@ -48,5 +48,27 @@ app.post("/quotes", (req, res) => {
 });
 
 app.put('/quotes', (req, res) => {
-    // Handle put request
+    db.collection("quotes").findOneAndUpdate(
+        // query
+        {
+            name: "Yoda"
+        },
+        // update
+        {
+            $set: {
+                name: req.body.name,
+                quote: req.body.quote
+            }
+        },
+        // options
+        {
+            sort: {_id: -1},
+            upsrt: true
+        },
+        // callback
+        (err, result) => {
+            if (err) return res.send(err);
+            res.send(result);
+        }
+    );
 });
