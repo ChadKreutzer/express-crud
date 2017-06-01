@@ -9,26 +9,34 @@ const app = express();
 
 var db;
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.set("view engine", "ejs");
 
 MongoClient.connect("mongodb://kanthalion:starwars@ds119210.mlab.com:19210/star-wars-quotes", (err, database) => {
-  if (err) return console.error(err);
-  db = database;
-  app.listen(process.env.PORT || 3000, function () {
-    console.log("listening on " + (process.env.PORT || 3000));
-  });
+    if (err) return console.error(err);
+    db = database;
+    app.listen(process.env.PORT || 3000, function() {
+        console.log("listening on " + (process.env.PORT || 3000));
+    });
 });
 
 
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+    db.collection("quotes").find().toArray((err, results) => {
+        if (err) return console.error(err);
+        
+        res.render("index.ejs", {quotes: results});
+        console.log(results);
+    });
 });
 
 app.post("/quotes", (req, res) => {
-  db.collection("quotes").save(req.body, (err, result) => {
-    if (err) return console.error(err);
-    console.log("saved to database");
-    res.redirect("/");
-  });
+    db.collection("quotes").save(req.body, (err, result) => {
+        if (err) return console.error(err);
+        console.log("saved to database");
+        res.redirect("/");
+    });
 })
