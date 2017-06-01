@@ -1,0 +1,29 @@
+{
+  "name": "express-crud",
+  "version": "1.0.0",
+  "description": "A simple crud app using express and mongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChadKreutzer/express-crud.git"
+  },
+  "author": "Chad Kreutzer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChadKreutzer/express-crud/issues"
+  },
+  "homepage": "https://github.com/ChadKreutzer/express-crud#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.27"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4",
+    "nodemon": "^1.11.0"
+  }
+}
