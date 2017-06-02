@@ -48,6 +48,7 @@ app.post("/quotes", (req, res) => {
 });
 
 app.put('/quotes', (req, res) => {
+    // Handle put request
     db.collection("quotes").findOneAndUpdate(
         // query
         {
@@ -63,7 +64,7 @@ app.put('/quotes', (req, res) => {
         // options
         {
             sort: {_id: -1},
-            upsrt: true
+            upsert: true
         },
         // callback
         (err, result) => {
