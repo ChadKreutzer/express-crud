@@ -4,18 +4,18 @@
 
 "use strict";
 
-const update = document.getElementById('update');
+const update = document.getElementById("update");
 
-update.addEventListener('click', function() {
+update.addEventListener("click", function() {
     // Send PUT Request here
-    fetch('quotes', {
-        method: 'put',
+    fetch("quotes", {
+        method: "put",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            'name': 'Darth Vader',
-            'quote': 'I find your lack of faith disturbing.'
+            "name": "Darth Vader",
+            "quote": "I find your lack of faith disturbing."
         })
     }).then(res => {
         if (res.ok) return res.json();
@@ -24,3 +24,24 @@ update.addEventListener('click', function() {
         window.location.reload(true);
     });
 });
+
+const del = document.getElementById("delete");
+
+del.addEventListener("click", function() {
+    fetch("quotes", {
+            method: "delete",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "name": "Darth Vader"
+            })
+        })
+        .then(res => {
+            if (res.ok) return res.json();
+        }).
+    then(data => {
+        console.log(data);
+        window.location.reload(true);
+    });
+})

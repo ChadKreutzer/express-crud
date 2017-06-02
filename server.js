@@ -47,7 +47,7 @@ app.post("/quotes", (req, res) => {
     });
 });
 
-app.put('/quotes', (req, res) => {
+app.put("/quotes", (req, res) => {
     // Handle put request
     db.collection("quotes").findOneAndUpdate(
         // query
@@ -63,13 +63,27 @@ app.put('/quotes', (req, res) => {
         },
         // options
         {
-            sort: {_id: -1},
+            sort: {
+                _id: -1
+            },
             upsert: true
         },
         // callback
         (err, result) => {
             if (err) return res.send(err);
             res.send(result);
+        }
+    );
+});
+
+app.delete("/quotes", (req, res) => {
+    db.collection("quotes").findOneAndDelete(
+        {
+            name: req.body.name
+        },
+        (err, result) => {
+            if (err) return res.send(500, err);
+            res.json("A darth vadar quote got deleted");
         }
     );
 });
